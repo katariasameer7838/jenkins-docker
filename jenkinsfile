@@ -21,7 +21,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'dotnet test src/aspnetapp.sln --logger "trx;LogFileName=./aspnetapp.trx"'
+                sh 'dotnet test src/aspnetapp.s --logger "trx;LogFileName=./aspnetapp.trx"'
             }
         }
 
@@ -39,7 +39,7 @@ pipeline {
                 script {
                     // Login to Docker Hub (or your Docker registry)
                     // Make sure to set your credentials in Jenkins credential store
-                    docker.withRegistry('https://index.docker.io/v1/', 'dckr_pat_mvACjAam2rhXv0EBWGqb6UU3b5A') {
+                    docker.withRegistry('https://index.docker.io/v1/', 'docker_login') {
                         // Push your Docker image
                         docker.image("${IMAGE_NAME}:${IMAGE_TAG}").push()
                     }
